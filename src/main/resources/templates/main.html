@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:insert="~{head.html}">
+    <link th:insert="~{header.html}">
+    <title>Students</title>
+</head>
+<body>
+    <div class="container py-3">
+        <table class="table table-light table-stripped">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Exam</th>
+                    <th>Mark</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="student : ${students}" th:style="${student.getMark()=='F'} ? 'color:red; font-weight: bold': ''">
+                    <td th:text="${student.getId()}"></td>
+                    <td th:text="${student.getName()}"></td>
+                    <td th:text="${student.getSurname()}"></td>
+                    <td th:text="${student.getExam()}"></td>
+                    <td th:text="${student.getMark()}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
