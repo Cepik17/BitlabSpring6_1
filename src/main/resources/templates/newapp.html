@@ -1,0 +1,32 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/main.html">
+    <div class="container mt-3" layout:fragment="content" style="width: 500px">
+        <form action="/addapp" method="post">
+            <div class="mb-3">
+                <label for="input1" class="form-label">ФИО:</label>
+                <input type="text" class="form-control" id="input1" name="userName">
+            </div>
+            <div class="mb-3">
+                <label for="input2" class="form-label">Курс:</label>
+                <select class="form-select" id ="input2" name="courseName">
+                    <option selected>Выберите Курс</option>
+                    <option>Java Developer</option>
+                    <option>Phyton</option>
+                    <option>Full Stack Developer</option>
+                    <option>UX design</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="input3" class="form-label">Телефон:</label>
+                <input type="text" class="form-control" id="input3" name="phone" placeholder="+7(7__)___-__-__">
+            </div>
+            <div class="mb-3">
+                <label for="Textarea1" class="form-label">Комментарии:</label>
+                <textarea class="form-control" id="Textarea1" rows="5" name="commentary"></textarea>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-success">Добавить заявку</button>
+            </div>
+        </form>
+    </div>
+</html>

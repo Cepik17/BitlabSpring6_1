@@ -1,0 +1,59 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/main.html">
+    <div class="container mt-3" layout:fragment="content" style="width: 500px">
+        <h5 class="mb-3" th:if="${!app.isHandled()}" style="color: red; text-align: center">***Новая необработаннная заявка***</h5>
+        <h5 class="mb-3" th:if="${app.isHandled()}" style="color: green; text-align: center">Обработаннная заявка</h5>
+        <div class="mb-3">
+            <label for="input1" class="form-label">ФИО:</label>
+            <input type="text" class="form-control" id="input1" th:value="${app.getUserName()}" disabled readonly>
+        </div>
+        <div class="mb-3">
+            <label for="input2" class="form-label">Курс:</label>
+            <input type="text" class="form-control" id="input2" th:value="${app.getCourseName()}" disabled readonly>
+        </div>
+        <div class="mb-3">
+            <label for="input3" class="form-label">Телефон:</label>
+            <input type="text" class="form-control" id="input3" th:value="${app.getPhone()}" disabled readonly>
+        </div>
+        <div class="mb-3">
+            <label for="Textarea1" class="form-label">Комментарии:</label>
+            <textarea class="form-control" id="Textarea1" rows="5" th:text="${app.getCommentary()}" disabled readonly></textarea>
+        </div>
+        <div class="row row-cols-2">
+            <div class="col" th:if="${!app.isHandled()}">
+                <form action="/sethandle" method="post">
+                    <input type="hidden" name="id" th:value="${app.getId()}">
+                    <button type="submit" class="btn btn-success" >Обработать заявку</button>
+                </form>
+            </div>
+            <div class="col">
+                <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAppModal">
+                        Удалить заявку
+                    </button>
+                <!-- Modal -->
+                <form action="/deleteapp" method="post">
+                    <div class="modal fade" id="deleteAppModal" tabindex="-1"
+                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel1">Удалить заявку</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="hidden" name="id" th:value="${app.getId()}">
+                                    <h4>Вы уверены?</h4>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Нет</button>
+                                    <button type="submit" class="btn btn-danger">Да</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</html>
