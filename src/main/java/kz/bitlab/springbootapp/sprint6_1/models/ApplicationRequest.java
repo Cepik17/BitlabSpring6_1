@@ -19,12 +19,14 @@ public class ApplicationRequest {
     private Long id;
     @Column(name = "username")
     private String userName;
-    @Column(name = "coursename")
-    private String courseName;
+//    @Column(name = "coursename")
+//    private String courseName;
     @Column(name = "commentary")
     private String commentary;
     @Column(name = "phone")
     private String phone;
     @Column(name = "handled")
     private boolean handled; //обработано или нет
+    @ManyToOne
+    private Course course;
 }

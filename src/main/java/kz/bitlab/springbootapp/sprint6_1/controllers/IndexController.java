@@ -1,7 +1,9 @@
 package kz.bitlab.springbootapp.sprint6_1.controllers;
 
 import kz.bitlab.springbootapp.sprint6_1.models.ApplicationRequest;
+import kz.bitlab.springbootapp.sprint6_1.models.Course;
 import kz.bitlab.springbootapp.sprint6_1.services.ApplicationRequestService;
+import kz.bitlab.springbootapp.sprint6_1.services.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,11 +18,15 @@ import java.util.List;
 public class IndexController {
     @Autowired
     private ApplicationRequestService applicationRequestService;
+    @Autowired
+    private CourseService courseService;
 
     @GetMapping("/")
     public String indexPage(Model model) {
         List<ApplicationRequest> apps = applicationRequestService.getAllApps();
+        List<Course> courses = courseService.getAll();
         model.addAttribute("apps", apps);
+        model.addAttribute("courses",courses);
         return "index";
     }
 
@@ -35,7 +41,9 @@ public class IndexController {
     }
 
     @GetMapping("/newapp")
-    public String newApp() {
+    public String newApp(Model model) {
+        List<Course> courses = courseService.getAll();
+        model.addAttribute("courses",courses);
         return "newapp";
     }
 
@@ -47,14 +55,10 @@ public class IndexController {
 
     @PostMapping("/sethandle")
     public String setHandle(@RequestParam Long id, Model model) {
-//        System.out.println("asdfg");
-//        System.out.println("id=" + id);
-//        ApplicationRequest applicationRequest = applicationRequestService.getAppById(id);
-//        System.out.println(applicationRequest.isHandled());
-//        applicationRequest.setHandled(true);
+        ApplicationRequest applicationRequest = applicationRequestService.getAppById(id);
         applicationRequestService.setAppHandled(id);
-        //       model.addAttribute("id",id);
-        return "redirect:/";
+        model.addAttribute("app", applicationRequest);
+        return "appdetails";
     }
 
     @PostMapping("/deleteapp")

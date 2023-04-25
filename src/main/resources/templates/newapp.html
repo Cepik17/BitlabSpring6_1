@@ -8,12 +8,15 @@
             </div>
             <div class="mb-3">
                 <label for="input2" class="form-label">Курс:</label>
-                <select class="form-select" id ="input2" name="courseName">
+                <select class="form-select" id ="input2" name="course.id">
                     <option selected>Выберите Курс</option>
-                    <option>Java Developer</option>
-                    <option>Phyton</option>
-                    <option>Full Stack Developer</option>
-                    <option>UX design</option>
+                    <option th:each="course : ${courses}"
+                            th:text="${course.getName()} + ' - '+ ${course.getPrice()} + ' KZT'"
+                            th:value="${course.getId()}"></option>
+<!--                    <option >Java Developer</option>-->
+<!--                    <option>Phyton</option>-->
+<!--                    <option>Full Stack Developer</option>-->
+<!--                    <option>UX design</option>-->
                 </select>
             </div>
             <div class="mb-3">

@@ -10,7 +10,7 @@
                             Заявка от: <span th:text="${app.getUserName()}"></span>
                         </h5>
                         <p class="card-text">
-                            Курс: <span th:text="${app.getCourseName()}"></span>
+                            Курс: <span th:text="${app.getCourse().getName()}"></span>
                         </p>
                         <p class="card-text" th:text="${app.getCommentary()}"></p>
                         <p class="card-text d-flex"  style="font-weight: bold">
